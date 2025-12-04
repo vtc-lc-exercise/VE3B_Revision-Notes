@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <title>VE3B Workplace Correspondence III – Revision Exercise</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #ec4899;
+      --accent: #f59e0b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --bg-gradient-start: #fef3c7;
+      --bg-gradient-end: #ddd6fe;
+      --card-bg: #ffffff;
+      --text: #1f2937;
+      --text-muted: #6b7280;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-md: 0 10px 40px rgba(99, 102, 241, 0.15);
+      --shadow-lg: 0 20px 60px rgba(99, 102, 241, 0.25);
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      padding: 0;
+    }
+
+    .app {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      width: 100%;
+      max-width: 920px;
+      margin: 12px;
+      border-radius: 28px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    header {
+      padding: 24px 28px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1), transparent);
+      border-radius: 50%;
+      top: -150px;
+      right: -100px;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    header h1 {
+      font-size: 1.3rem;
+      line-height: 1.4;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 small {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+
+    header .badge {
+      background: rgba(255,255,255,0.2);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    header .badge span {
+      font-size: 1.2rem;
+      animation: sparkle 3s ease-in-out infinite;
+    }
+
+    main {
+      padding: 28px;
+      flex: 1;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: visible;
+      border: 1px solid rgba(99, 102, 241, 0.1);
+      text-align: center;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent);
+      top: -80px;
+      right: -80px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .emoji-header {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .landing-title {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .landing-subtitle {
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 32px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .challenge-text {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .tagline {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .org-block {
+      background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+      padding: 20px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--primary);
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .org-block div {
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .org-block div:first-child {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 32px auto;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .feature-list li {
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .feature-list li::before {
+      content: attr(data-emoji);
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+      justify-content: center;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+      font-size: 1.15rem;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+      color: var(--text);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid #e5e7eb;
+    }
+
+    .btn-ghost:hover {
+      background: #f9fafb;
+      color: var(--text);
+    }
+
+    .progress {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 10px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      margin: 0 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .part-label {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .instruction {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: var(--text);
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      padding: 14px 16px;
+      border-radius: 12px;
+      border-left: 4px solid var(--warning);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      text-align: left;
+    }
+
+    .instruction span {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .email-block {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-radius: 16px;
+      padding: 20px;
+      border: 2px solid #e2e8f0;
+      font-size: 1rem;
+      line-height: 1.8;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
+      text-align: left;
+    }
+
+    .email-paragraph {
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    .clickable-error {
+      position: relative;
+      padding: 2px 6px;
+      margin: 0 1px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-block;
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      box-shadow: 0 0 0 2px #fbbf24;
+      font-weight: 600;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .clickable-error:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4), 0 0 0 2px #fbbf24;
+    }
+
+    .clickable-error[data-correct="true"] {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      box-shadow: 0 0 0 2px var(--success);
+      color: #065f46;
+      animation: none;
+    }
+
+    .clickable-error[data-correct="false"] {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      box-shadow: 0 0 0 2px var(--danger);
+      color: #991b1b;
+      animation: none;
+    }
+
+    .clickable-error:active {
+      transform: scale(0.95);
+    }
+
+    .input-popover {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      min-width: 300px;
+      max-width: 90vw;
+      border: 2px solid var(--primary);
+      animation: slideInUp 0.3s ease;
+    }
+
+    .popover-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 99;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .input-popover label {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .input-popover input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 2px solid #e5e7eb;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .input-popover input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    }
+
+    .tiny {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .feedback {
+      margin-top: 20px;
+      font-size: 0.92rem;
+      max-height: 200px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .feedback::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .feedback::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 999px;
+    }
+
+    .feedback-item {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-radius: 14px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--warning);
+      margin-bottom: 12px;
+      animation: slideInUp 0.4s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .feedback-item.correct {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-left-color: var(--success);
+    }
+
+    .feedback-item.wrong {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      border-left-color: var(--danger);
+    }
+
+    .feedback-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1rem;
+    }
+
+    .feedback-body {
+      font-size: 0.88rem;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .feedback-body strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .footer-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px;
+      background: #f9fafb;
+      border-radius: 10px;
+      border-left: 3px solid var(--primary);
+    }
+
+    .summary-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .summary-card {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-radius: 16px;
+      padding: 20px;
+      border: 2px solid #e2e8f0;
+      font-size: 0.92rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .summary-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    .summary-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.2);
+    }
+
+    .summary-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .summary-card ul {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    .summary-card li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 24px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      color: #065f46;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+      border: 2px solid var(--success);
+    }
+
+    .score-badge span {
+      font-size: 1.6rem;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .screen {
+      animation: slideInUp 0.5s ease;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 18px 20px;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      header h1 {
+        font-size: 1.1rem;
+      }
+
+      header .badge {
+        align-self: flex-start;
+      }
+
+      main {
+        padding: 20px 16px;
+      }
+
+      .card {
+        padding: 28px 20px;
+      }
+
+      .emoji-header {
+        font-size: 3rem;
+      }
+
+      .landing-title {
+        font-size: 1.6rem;
+      }
+
+      .landing-subtitle {
+        font-size: 1.1rem;
+      }
+
+      button {
+        padding: 14px 32px;
+        font-size: 1rem;
+      }
+
+      .input-popover {
+        min-width: 280px;
+        max-width: 85vw;
+        padding: 16px;
+      }
+
+      .email-block {
+        padding: 16px;
+        font-size: 0.95rem;
+      }
+
+      .progress-bar {
+        margin: 0 10px;
+      }
+
+      .feature-list li {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .landing-title {
+        font-size: 1.4rem;
+      }
+
+      .emoji-header {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>
+      VE3B: Workplace Correspondence III
+    </h1>
+    <div class="badge">
+      <span>✨</span>
+      <span>Interactive</span>
+    </div>
+  </header>
+
+  <main id="app-main">
+    <!-- Screens will be injected here -->
+  </main>
+</div>
+
+<script>
+  const data = [
+    {
+      id: 1,
+      title: "Part 1",
+      instruction: "Click any highlighted word or phrase that you think has a mistake, then type the correct form.",
+      text: "Dear Selina\n\nThank you for your email.  I am sorry to learning that some of our clients are not satisfied with our facilities.  After analysing the survey results, I would like to providing you with a summary of the major feedback received and explained the potential reasons behind these issues.",
+      errors: [
+        {
+          wrong: "learning",
+          correct: "learn",
+          type: "word form",
+          explanation: "After 'to' (part of an infinitive), use the base form of the verb. Use 'learn' instead of 'learning'."
+        },
+        {
+          wrong: "providing",
+          correct: "provide",
+          type: "word form",
+          explanation: "After 'would like to', use the base form of the verb (infinitive without 'to'). Use 'provide' instead of 'providing'."
+        },
+        {
+          wrong: "explained",
+          correct: "explain",
+          type: "parallel structure",
+          explanation: "To maintain parallel structure with 'provide', use the base form 'explain' instead of 'explained'."
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "Part 2",
+      instruction: "Focus on verb forms, countable/uncountable nouns, and subject-verb agreement.",
+      text: "Firstly, three in four respondents disagreed that our facility condition was good.  One possible explanation are that there are broken equipments, damaged common areas, and unaddressed maintenance issues that have been ongoing for a long time.  In order to solving this problem, we may consider conducting a thorough assessment of the facilities to identify the areas that require maintenance and repair.",
+      errors: [
+        {
+          wrong: "are",
+          correct: "is",
+          type: "subject-verb agreement",
+          explanation: "The subject is 'One possible explanation' (singular), so use the singular verb 'is' instead of 'are'."
+        },
+        {
+          wrong: "equipments",
+          correct: "equipment",
+          type: "countable/uncountable",
+          explanation: "'Equipment' is an uncountable noun in English, so it does not take a plural form. Use 'equipment' not 'equipments'."
+        },
+        {
+          wrong: "solving",
+          correct: "solve",
+          type: "word form",
+          explanation: "After 'in order to', use the base form of the verb. Use 'solve' instead of 'solving'."
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Part 3",
+      instruction: "Look for word form mistakes and verb patterns.",
+      text: "In addition, four out of five respondents pointed out that our facility cleanliness was below average.  It is possible that our common areas is dirty.  To deal with this issue, it is suggested that our Cleaning Team increasing the frequency of cleaning.  Where possible, we should conducted regular inspections.",
+      errors: [
+        {
+          wrong: "is",
+          correct: "are",
+          type: "subject-verb agreement",
+          explanation: "The subject is 'our common areas' (plural), so use the plural verb 'are' instead of 'is'."
+        },
+        {
+          wrong: "increasing",
+          correct: "increase",
+          type: "word form",
+          explanation: "After 'it is suggested that', use the base form of the verb (subjunctive mood). Use 'increase' instead of 'increasing'."
+        },
+        {
+          wrong: "conducted",
+          correct: "conduct",
+          type: "word form",
+          explanation: "After 'should', use the base form of the verb. Use 'conduct' instead of 'conducted'."
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "Part 4",
+      instruction: "Check verb tenses and word forms.",
+      text: "Through the survey, our respondents have raised some valuable suggestions for our consideration.  First of all, more than four-fifths of the respondents expressing the need for new amenities.  I believe that this is a welcoming proposal that can enhance residents' living experience.  As a response to this suggestion, perhaps we could added a Child Corner in order to allow children to engage in recreational activities.",
+      errors: [
+        {
+          wrong: "expressing",
+          correct: "expressed",
+          type: "tense",
+          explanation: "Use the past tense 'expressed' to match the reporting of survey results, not the present continuous 'expressing'."
+        },
+        {
+          wrong: "added",
+          correct: "add",
+          type: "word form",
+          explanation: "After 'could' (modal verb), use the base form of the verb. Use 'add' instead of 'added'."
+        }
+      ]
+    },
+    {
+      id: 5,
+      title: "Part 5",
+      instruction: "Spot errors with verb patterns after certain expressions.",
+      text: "Furthermore, almost all of the respondents suggested that we provided better green measures. In response to the feedback mentioned, it is worth to consider that we place more recycling bins in the lobbies so as to promote sustainable practices. Would you like me to conducting research online to gather more information on common practices?",
+      errors: [
+        {
+          wrong: "provided",
+          correct: "provide",
+          type: "word form",
+          explanation: "After 'suggested that', use the base form of the verb (subjunctive mood). Use 'provide' instead of 'provided'."
+        },
+        {
+          wrong: "to consider",
+          correct: "considering",
+          type: "word form",
+          explanation: "The pattern is 'worth + -ing'. The phrase should be 'worth considering', not 'worth to consider'."
+        },
+        {
+          wrong: "conducting",
+          correct: "conduct",
+          type: "word form",
+          explanation: "After 'to' (infinitive marker), use the base form of the verb. Use 'conduct' instead of 'conducting'."
+        }
+      ]
+    },
+    {
+      id: 6,
+      title: "Part 6",
+      instruction: "Check countable/uncountable nouns and subject-verb agreement.",
+      text: "I hope the informations above is useful.  Please feel free to let me know if further information are needed.\n\nRegards\nMartha",
+      errors: [
+        {
+          wrong: "informations",
+          correct: "information",
+          type: "countable/uncountable",
+          explanation: "'Information' is an uncountable noun in English, so it does not take a plural form. Use 'information' not 'informations'."
+        },
+        {
+          wrong: "are",
+          correct: "is",
+          type: "subject-verb agreement",
+          explanation: "The subject is 'further information' (uncountable, singular), so use the singular verb 'is' instead of 'are'."
+        }
+      ]
+    }
+  ];
+
+  let currentScreen = "landing";
+  let currentPartIndex = 0;
+  let answersState = {};
+
+  function setScreen(screen, partIndex = 0) {
+    currentScreen = screen;
+    const main = document.getElementById("app-main");
+    main.innerHTML = "";
+
+    if (screen === "landing") {
+      main.appendChild(renderLanding());
+    } else if (screen === "part") {
+      currentPartIndex = partIndex;
+      main.appendChild(renderPart(data[partIndex]));
+    } else if (screen === "summary") {
+      main.appendChild(renderSummary());
+    }
+  }
+
+  function renderLanding() {
+    const wrapper = document.createElement("div");
+    wrapper.className = "screen";
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const content = document.createElement("div");
+    content.className = "card-content";
+
+    content.innerHTML = `
+      <div class="emoji-header">
+        🏫🏢📧
+      </div>
+
+      <h1 class="landing-title">VE3B: Workplace Correspondence III</h1>
+
+      <div class="challenge-text">
+        <span>📝</span> Revision Exercise <span>🌟</span>
+      </div>
+      
+      <p class="tagline">
+        Ready to master verb forms and improve your workplace writing skills?
+      </p>
+
+      <ul class="feature-list">
+        <li data-emoji="✨">Tap or click the correct verb forms</li>
+        <li data-emoji="📄">Proofread sentences and fix errors</li>
+        <li data-emoji="🎯">Get instant feedback and helpful hints</li>
+        <li data-emoji="📊">Review your progress and learn from mistakes</li>
+      </ul>
+
+      <div class="btn-row">
+        <button class="btn-primary" id="start-btn">
+          Start Part 1 🚀
+        </button>
+      </div>
+    `;
+
+    card.appendChild(content);
+    wrapper.appendChild(card);
+
+    setTimeout(() => {
+      const startBtn = wrapper.querySelector("#start-btn");
+      startBtn.addEventListener("click", () => setScreen("part", 0));
+    }, 0);
+
+    return wrapper;
+  }
+
+  function renderProgress(partIndex) {
+    const container = document.createElement("div");
+    container.className = "progress";
+
+    const label = document.createElement("div");
+    label.textContent = `Part ${partIndex + 1} of ${data.length}`;
+
+    const bar = document.createElement("div");
+    bar.className = "progress-bar";
+
+    const fill = document.createElement("div");
+    fill.className = "progress-fill";
+    const percent = ((partIndex + 1) / data.length) * 100;
+    fill.style.width = `${percent}%`;
+
+    bar.appendChild(fill);
+
+    const emoji = document.createElement("div");
+    emoji.textContent = "📊";
+
+    container.appendChild(label);
+    container.appendChild(bar);
+    container.appendChild(emoji);
+    return container;
+  }
+
+  function renderPart(part) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "screen";
+
+    const progress = renderProgress(currentPartIndex);
+    wrapper.appendChild(progress);
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const content = document.createElement("div");
+    content.className = "card-content";
+
+    const label = document.createElement("div");
+    label.className = "part-label";
+    label.innerHTML = `<span>${part.title} 🕵️‍♀️</span>`;
+
+    const instruction = document.createElement("p");
+    instruction.className = "instruction";
+    instruction.innerHTML = `<span>👉</span>${part.instruction}`;
+
+    const emailBlock = document.createElement("div");
+    emailBlock.className = "email-block";
+
+    if (!answersState[part.id]) {
+      answersState[part.id] = {};
+    }
+
+    // Create paragraph with highlighted errors
+    const paragraph = document.createElement("div");
+    paragraph.className = "email-paragraph";
+    
+    let textContent = part.text;
+    let elements = [];
+    
+    // Sort errors by position in text (to handle them in order)
+    let sortedErrors = part.errors.map((error, index) => ({
+      ...error,
+      index: index,
+      position: textContent.indexOf(error.wrong)
+    })).sort((a, b) => a.position - b.position);
+
+    let lastIndex = 0;
+    sortedErrors.forEach((error) => {
+      const pos = textContent.indexOf(error.wrong, lastIndex);
+      if (pos !== -1) {
+        // Add text before error
+        if (pos > lastIndex) {
+          elements.push({
+            type: 'text',
+            content: textContent.substring(lastIndex, pos)
+          });
+        }
+        // Add error
+        elements.push({
+          type: 'error',
+          content: error.wrong,
+          errorData: error
+        });
+        lastIndex = pos + error.wrong.length;
+      }
+    });
+    
+    // Add remaining text
+    if (lastIndex < textContent.length) {
+      elements.push({
+        type: 'text',
+        content: textContent.substring(lastIndex)
+      });
+    }
+
+    // Build the paragraph
+    elements.forEach((element) => {
+      if (element.type === 'text') {
+        // Split by newlines and handle them
+        const parts = element.content.split('\n');
+        parts.forEach((part, idx) => {
+          paragraph.appendChild(document.createTextNode(part));
+          if (idx < parts.length - 1) {
+            paragraph.appendChild(document.createElement('br'));
+          }
+        });
+      } else if (element.type === 'error') {
+        const span = document.createElement("span");
+        span.className = "clickable-error";
+        span.textContent = element.content;
+        span.dataset.errorIndex = element.errorData.index;
+        
+        const existing = answersState[part.id][element.errorData.index];
+        if (existing) {
+          span.dataset.correct = existing.isCorrect ? "true" : "false";
+        }
+        
+        span.addEventListener("click", (event) => {
+          openPopover(part, element.errorData);
+        });
+        
+        paragraph.appendChild(span);
+      }
+    });
+
+    emailBlock.appendChild(paragraph);
+
+    const feedbackDiv = document.createElement("div");
+    feedbackDiv.className = "feedback";
+    feedbackDiv.id = "feedback-" + part.id;
+
+    const footerNote = document.createElement("p");
+    footerNote.className = "footer-note";
+    footerNote.innerHTML = "✅ Aim to correct all highlighted words before moving to the next part.";
+
+    const btnRow = document.createElement("div");
+    btnRow.className = "btn-row";
+
+    const backBtn = document.createElement("button");
+    backBtn.className = "btn-ghost";
+    backBtn.textContent = "⬅️ Back to landing";
+    backBtn.addEventListener("click", () => setScreen("landing"));
+
+    const nextBtn = document.createElement("button");
+    nextBtn.className = "btn-primary";
+    nextBtn.textContent =
+      currentPartIndex === data.length - 1
+        ? "Finish & view summary 🎉"
+        : "Next part ➡️";
+    nextBtn.addEventListener("click", () => {
+      const remaining = countRemainingErrors(part);
+      if (remaining > 0) {
+        const proceed = confirm(
+          `⚠️ You still have ${remaining} highlighted word(s) to correct in this part.\n\nAre you sure you want to continue?`
+        );
+        if (!proceed) return;
+      }
+
+      if (currentPartIndex === data.length - 1) {
+        setScreen("summary");
+      } else {
+        setScreen("part", currentPartIndex + 1);
+      }
+    });
+
+    btnRow.appendChild(backBtn);
+    btnRow.appendChild(nextBtn);
+
+    content.appendChild(label);
+    content.appendChild(instruction);
+    content.appendChild(emailBlock);
+    content.appendChild(feedbackDiv);
+    content.appendChild(footerNote);
+    content.appendChild(btnRow);
+
+    card.appendChild(content);
+    wrapper.appendChild(card);
+
+    return wrapper;
+  }
+
+  function openPopover(part, errorData) {
+    closeAllPopovers();
+
+    // Create overlay
+    const overlay = document.createElement("div");
+    overlay.className = "popover-overlay";
+    overlay.addEventListener("click", closeAllPopovers);
+
+    const popover = document.createElement("div");
+    popover.className = "input-popover";
+
+    popover.innerHTML = `
+      <label>Type the correct word or phrase:</label>
+      <input type="text" id="input-correction" autocomplete="off" />
+      <button class="btn-primary" style="width:100%;justify-content:center;margin-top:4px;">Check ✅</button>
+      <div class="tiny">Press Enter to submit or click outside to cancel.</div>
+    `;
+
+    document.body.appendChild(overlay);
+    document.body.appendChild(popover);
+
+    const input = popover.querySelector("#input-correction");
+    input.focus();
+
+    const submit = () => {
+      const user = input.value.trim();
+      if (!user) return;
+      const isCorrect =
+        user.toLowerCase() === errorData.correct.toLowerCase();
+
+      answersState[part.id][errorData.index] = {
+        user,
+        correct: errorData.correct,
+        isCorrect,
+        type: errorData.type,
+        explanation: errorData.explanation,
+        original: errorData.wrong
+      };
+
+      // Update all error spans with this index
+      document.querySelectorAll(`[data-error-index="${errorData.index}"]`).forEach(span => {
+        span.dataset.correct = isCorrect ? "true" : "false";
+      });
+
+      addFeedback(part.id, answersState[part.id][errorData.index]);
+      closeAllPopovers();
+    };
+
+    popover.querySelector("button").addEventListener("click", submit);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        submit();
+      } else if (e.key === "Escape") {
+        closeAllPopovers();
+      }
+    });
+
+    // Prevent overlay click from propagating to popover
+    popover.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  }
+
+  function closeAllPopovers() {
+    document.querySelectorAll(".input-popover").forEach(p => p.remove());
+    document.querySelectorAll(".popover-overlay").forEach(o => o.remove());
+  }
+
+  function addFeedback(partId, item) {
+    const feedbackDiv = document.getElementById("feedback-" + partId);
+    if (!feedbackDiv) return;
+
+    const div = document.createElement("div");
+    div.className = "feedback-item " + (item.isCorrect ? "correct" : "wrong");
+
+    const title = document.createElement("div");
+    title.className = "feedback-title";
+    title.textContent = item.isCorrect
+      ? "✅ Excellent! That's correct."
+      : "❌ Not quite – here's the model answer";
+
+    const body = document.createElement("div");
+    body.className = "feedback-body";
+
+    if (item.isCorrect) {
+      body.innerHTML = `
+        You changed <strong>${item.original}</strong> to <strong>${item.correct}</strong>. <br />
+        <strong>Why:</strong> ${item.explanation}
+      `;
+    } else {
+      body.innerHTML = `
+        <strong>Your answer:</strong> ${item.user}<br />
+        <strong>Model answer:</strong> ${item.correct}<br />
+        <strong>Why:</strong> ${item.explanation}
+      `;
+    }
+
+    div.appendChild(title);
+    div.appendChild(body);
+    feedbackDiv.appendChild(div);
+    feedbackDiv.scrollTop = feedbackDiv.scrollHeight;
+  }
+
+  function countRemainingErrors(part) {
+    let remaining = 0;
+    const state = answersState[part.id] || {};
+    part.errors.forEach((error, index) => {
+      if (!state[index]) remaining += 1;
+    });
+    return remaining;
+  }
+
+  function renderSummary() {
+    let totalErrors = 0;
+    let correctCount = 0;
+
+    data.forEach((part) => {
+      const state = answersState[part.id] || {};
+      part.errors.forEach((error, index) => {
+        totalErrors += 1;
+        if (state[index] && state[index].isCorrect) {
+          correctCount += 1;
+        }
+      });
+    });
+
+    const scorePercent =
+      totalErrors === 0 ? 0 : Math.round((correctCount / totalErrors) * 100);
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "screen";
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const content = document.createElement("div");
+    content.className = "card-content";
+
+    const title = document.createElement("div");
+    title.className = "landing-title";
+    title.innerHTML = `Well done! Summary & Next Steps 🎉`;
+
+    const scoreBadge = document.createElement("div");
+    scoreBadge.className = "score-badge";
+    scoreBadge.innerHTML = `<span>🌟</span><strong>${correctCount}</strong> / ${totalErrors} corrections correct (${scorePercent}%)`;
+
+    const intro = document.createElement("p");
+    intro.className = "tagline";
+    intro.textContent =
+      "Here is a brief guide on what to be careful of in workplace correspondence and what to do in future writing.";
+
+    const grid = document.createElement("div");
+    grid.className = "summary-grid";
+
+    const card1 = document.createElement("div");
+    card1.className = "summary-card";
+    card1.innerHTML = `
+      <h3>🔤 Word Form & Infinitives</h3>
+      <ul>
+        <li>After "to" (infinitive marker), always use the base form of the verb, not the -ing form.</li>
+        <li>After modal verbs (could, should, may), use the base form of the verb.</li>
+        <li>Keep parallel structure: if you use one infinitive (to provide), match it with another infinitive (to explain).</li>
+      </ul>
+    `;
+
+    const card2 = document.createElement("div");
+    card2.className = "summary-card";
+    card2.innerHTML = `
+      <h3>📚 Countable / Uncountable & Agreement</h3>
+      <ul>
+        <li>Some nouns such as "equipment" and "information" are uncountable and never take plural -s.</li>
+        <li>Check that the verb agrees with the subject in number (singular subject → singular verb).</li>
+        <li>Uncountable nouns are always treated as singular.</li>
+      </ul>
+    `;
+
+    const card3 = document.createElement("div");
+    card3.className = "summary-card";
+    card3.innerHTML = `
+      <h3>🧩 Verb Patterns & Collocations</h3>
+      <ul>
+        <li>After "suggested that" or "it is suggested that", use the base form of the verb (subjunctive mood).</li>
+        <li>Use "worth + -ing" (e.g. "worth considering"), not "worth to + verb".</li>
+        <li>The pattern is "It is worth considering that...", not "It is worth to consider that...".</li>
+      </ul>
+    `;
+
+    const card4 = document.createElement("div");
+    card4.className = "summary-card";
+    card4.innerHTML = `
+      <h3>✉️ Email Layout & Tenses</h3>
+      <ul>
+        <li>Use past tense when reporting survey results or completed actions.</li>
+        <li>In formal workplace emails, proofread carefully for consistency in tense and verb form.</li>
+        <li>Pay attention to verb patterns after expressions like "worth", "suggested that", and "in order to".</li>
+      </ul>
+    `;
+
+    grid.appendChild(card1);
+    grid.appendChild(card2);
+    grid.appendChild(card3);
+    grid.appendChild(card4);
+
+    const btnRow = document.createElement("div");
+    btnRow.className = "btn-row";
+
+    const restartBtn = document.createElement("button");
+    restartBtn.className = "btn-primary";
+    restartBtn.textContent = "🔁 Restart from Part 1";
+    restartBtn.addEventListener("click", () => {
+      answersState = {};
+      setScreen("part", 0);
+    });
+
+    const landingBtn = document.createElement("button");
+    landingBtn.className = "btn-secondary";
+    landingBtn.textContent = "🏠 Back to landing";
+    landingBtn.addEventListener("click", () => setScreen("landing"));
+
+    btnRow.appendChild(restartBtn);
+    btnRow.appendChild(landingBtn);
+
+    const note = document.createElement("p");
+    note.className = "footer-note";
+    note.innerHTML =
+      "✨ Tip: Use this email as a model when you write your own workplace correspondence. Check word forms, agreement, and layout before sending.";
+
+    content.appendChild(title);
+    content.appendChild(scoreBadge);
+    content.appendChild(intro);
+    content.appendChild(grid);
+    content.appendChild(btnRow);
+    content.appendChild(note);
+
+    card.appendChild(content);
+    wrapper.appendChild(card);
+
+    return wrapper;
+  }
+
+  setScreen("landing");
+</script>
+</body>
+</html>
